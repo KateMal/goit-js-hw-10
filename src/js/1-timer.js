@@ -74,18 +74,18 @@ btn.addEventListener('click', () => {
     const delta = myDate - now;
     const time = convertMs(delta);
     const dataDays = document.querySelector('[data-days]');
-    dataDays.textContent = pad(time.days);
+    dataDays.textContent = addLeadingZero(time.days);
     const datahours = document.querySelector('[data-hours]');
-    datahours.textContent = pad(time.hours);
+    datahours.textContent = addLeadingZero(time.hours);
     const dataminutes = document.querySelector('[data-minutes]');
-    dataminutes.textContent = pad(time.minutes);
+    dataminutes.textContent = addLeadingZero(time.minutes);
     const dataseconds = document.querySelector('[data-seconds]');
-    dataseconds.textContent = pad(time.seconds);
+    dataseconds.textContent = addLeadingZero(time.seconds);
 
     //todo set to html
   }, 1000);
 });
 
-function pad(value) {
+function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
