@@ -1,2 +1,2 @@
-import"./assets/modulepreload-polyfill-B5Qt9EMX.js";/* empty css                      */console.log(2);
+import"./assets/modulepreload-polyfill-B5Qt9EMX.js";/* empty css                      */import{i as s}from"./assets/vendor-BbbuE1sJ.js";const o=document.querySelector(".form");o.addEventListener("submit",i=>{i.preventDefault();const t=Number(o.elements.delay.value),m=o.elements.state.value;new Promise((e,r)=>{setTimeout(()=>{m==="fulfilled"?e(t):r(t)},t)}).then(e=>{s.show({title:"Повідомлення",message:`Виконано через ${e}ms`,backgroundColor:"#00cc66",position:"topRight",timeout:3e3})}).catch(e=>{s.show({title:"Повідомлення",message:`Відхилено через ${e}ms`,backgroundColor:"#cc0000",position:"topLeft",timeout:3e3})})});
 //# sourceMappingURL=2-snackbar.js.map
