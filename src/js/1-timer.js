@@ -12,6 +12,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 let myDate = '';
 let intervalId = null;
 const btn = document.querySelector('[data-start]');
+const dateInput = document.querySelector('#datetime-picker');
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -67,22 +68,36 @@ if (myDate === '') {
 
 btn.addEventListener('click', () => {
   if (intervalId) return; // prevent multiple intervals
+  if (!myDate) return;
 
   btn.disabled = true;
+  if (dateInput) dateInput.disabled = true; // disable input during countdown
+
   intervalId = setInterval(() => {
     const now = new Date();
     const delta = myDate - now;
     const time = convertMs(delta);
     const dataDays = document.querySelector('[data-days]');
-    dataDays.textContent = addLeadingZero(time.days);
     const datahours = document.querySelector('[data-hours]');
-    datahours.textContent = addLeadingZero(time.hours);
     const dataminutes = document.querySelector('[data-minutes]');
-    dataminutes.textContent = addLeadingZero(time.minutes);
     const dataseconds = document.querySelector('[data-seconds]');
-    dataseconds.textContent = addLeadingZero(time.seconds);
 
-    //todo set to html
+    if (delta <= 0) {
+      if (dataDays) dataDays.textContent = addLeadingZero(0);
+      if (datahours) datahours.textContent = addLeadingZero(0);
+      if (dataminutes) dataminutes.textContent = addLeadingZero(0);
+      if (dataseconds) dataseconds.textContent = addLeadingZero(0);
+
+      clearInterval(intervalId);
+      intervalId = null;
+      if (dateInput) dateInput.disabled = false;
+      return;
+    }
+
+    if (dataDays) dataDays.textContent = addLeadingZero(time.days);
+    if (datahours) datahours.textContent = addLeadingZero(time.hours);
+    if (dataminutes) dataminutes.textContent = addLeadingZero(time.minutes);
+    if (dataseconds) dataseconds.textContent = addLeadingZero(time.seconds);
   }, 1000);
 });
 
